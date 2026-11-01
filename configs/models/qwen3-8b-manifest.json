@@ -4,7 +4,7 @@
   "resolved_on": "2026-11-01",
   "source": "https://huggingface.co/api/models/Qwen/Qwen3-8B",
   "thinking": false,
-  "weights_downloaded": false,
+  "weights_downloaded": true,
   "engine_version": "0.11.2",
-  "note": "Isolated WSL serving environment installed; CUDA smoke and vLLM CLI passed. Weights are still downloading; model inference is not yet verified."
+  "note": "All weights and supporting files downloaded; weight SHA256 verified against pinned Hugging Face manifest. Isolated WSL CUDA smoke and vLLM CLI passed; model inference is not yet verified."
 }

@@ -1,0 +1,76 @@
+{
+  "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+  "verified_at": 1793525518.711825,
+  "files": {
+    "LICENSE": {
+      "size": 11343,
+      "mtime_ns": 1793517405563915600,
+      "sha256": null
+    },
+    "README.md": {
+      "size": 16660,
+      "mtime_ns": 1793517406568983400,
+      "sha256": null
+    },
+    "config.json": {
+      "size": 728,
+      "mtime_ns": 1793517407911952300,
+      "sha256": null
+    },
+    "generation_config.json": {
+      "size": 239,
+      "mtime_ns": 1793517408743199500,
+      "sha256": null
+    },
+    "merges.txt": {
+      "size": 1671853,
+      "mtime_ns": 1793517413351271100,
+      "sha256": null
+    },
+    "model-00001-of-00005.safetensors": {
+      "size": 3996250744,
+      "mtime_ns": 1793521521113886000,
+      "sha256": "31d6a825ae35f11fb85b195b4c42c146c051e446433125a215336abdf95cbf5f"
+    },
+    "model-00002-of-00005.safetensors": {
+      "size": 3993160032,
+      "mtime_ns": 1793521524952111500,
+      "sha256": "5991236cea6fe21f3d43cab0f0e84448734fbbe0789816202989f2ddc9d18282"
+    },
+    "model-00003-of-00005.safetensors": {
+      "size": 3959604768,
+      "mtime_ns": 1793521528697536100,
+      "sha256": "c5185c4794be2d8a9784d5753c9922db38df478ce11f9ed0b415b7304d896836"
+    },
+    "model-00004-of-00005.safetensors": {
+      "size": 3187841392,
+      "mtime_ns": 1793521532151702200,
+      "sha256": "b5ee7de71fbf17db3d5704e0c8f2bc7d005ca9e1d7ca2aeb19827b0cfcaa917a"
+    },
+    "model-00005-of-00005.safetensors": {
+      "size": 1244659840,
+      "mtime_ns": 1793521533783200500,
+      "sha256": "20c2d6366ab85c90786ccdd829cd2b9e7d30ef3b2ebbb998280e7e4014b542ff"
+    },
+    "model.safetensors.index.json": {
+      "size": 32878,
+      "mtime_ns": 1793517988645970300,
+      "sha256": null
+    },
+    "tokenizer.json": {
+      "size": 11422654,
+      "mtime_ns": 1793525456460766700,
+      "sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+    },
+    "tokenizer_config.json": {
+      "size": 9732,
+      "mtime_ns": 1793525446823304900,
+      "sha256": null
+    },
+    "vocab.json": {
+      "size": 2776833,
+      "mtime_ns": 1793525460001037400,
+      "sha256": null
+    }
+  }
+}

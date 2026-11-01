@@ -73,4 +73,15 @@ if __name__ == '__main__':
     assert manifest['sha'] == REVISION
     with ThreadPoolExecutor(max_workers=5) as pool:
         list(pool.map(download, [e for e in manifest['siblings'] if e['rfilename'] != '.gitattributes']))
+    receipt = {'revision': REVISION, 'verified_at': time.time(), 'files': {}}
+    for entry in manifest['siblings']:
+        name = entry['rfilename']
+        if name == '.gitattributes':
+            continue
+        stat = (ROOT / name).stat()
+        receipt['files'][name] = {'size': stat.st_size, 'mtime_ns': stat.st_mtime_ns,
+                                 'sha256': entry.get('lfs', {}).get('sha256')}
+    temp = ROOT / 'verification.json.tmp'
+    temp.write_text(json.dumps(receipt, indent=2), encoding='utf-8')
+    temp.replace(ROOT / 'verification.json')
     print('MODEL_DOWNLOAD_VERIFIED', flush=True)

@@ -2,6 +2,11 @@
 
 日期：2026-11-01。状态：running，尚未部署模型。
 
+2026-11-01 更新：5 个权重分片下载及 SHA256 校验全部完成，tokenizer 等配套文件补齐。
+完整性记录见 `download-verification.json`（非 LFS 配套文件检查大小）；观测页已实测显示 16.40 GB / 16.40 GB、100%、逐权重 SHA256 通过。
+新增分段下载器 `scripts/download_ranges.py` 保留已有前缀、校验 HTTP Content-Range、合并后校验原始 SHA256；运行时不得与另一个下载器同时写同一模型目录。
+下载监控去重与校验失效测试通过，项目共 12 项测试通过。模型启动和真实推理仍待执行。
+
 ## 已完成
 
 - 复核 D 盘 Ubuntu 存储：Linux 文件系统仍有约 944 GiB 可用，WSL RAM 约 15 GiB。

@@ -10,6 +10,10 @@ import threading
 import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import urllib.request
+try:
+    from monitoring.downloads import snapshot as download_snapshot
+except ModuleNotFoundError:
+    from downloads import snapshot as download_snapshot
 
 ROOT = Path(__file__).parent
 STATE = {"ready": False, "error": "Waiting for first scrape", "history": []}
@@ -157,7 +161,13 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(body)
 
     def do_GET(self):
-        if self.path == "/api/status":
+        if self.path == '/api/downloads':
+            try:
+                data = download_snapshot()
+            except Exception as exc:
+                data = {'error': str(exc)}
+            body, mime = json.dumps(data).encode(), 'application/json'
+        elif self.path == "/api/status":
             with LOCK:
                 body = json.dumps(STATE, allow_nan=False).encode()
             mime = "application/json"
