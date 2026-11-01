@@ -8,7 +8,9 @@
 - 固定模型 revision：`b968826d9c46dd6066d109eabc6255188de91218`，见 configs/models/qwen3-8b-manifest.json。
 - 添加标准库流式客户端 scripts/smoke_request.py，明确关闭 thinking；检查非空内容、finish_reason 和 DONE。
 - 在服务未启动时执行客户端，确认连接失败以非零退出码结束并保存失败状态，不伪造成功结果。
-- 服务环境固定 vLLM 0.11.2、Transformers 4.57.1；隔离安装正在进行。vLLM 依赖 torch 2.9.0，不覆盖 EXP-01 的 torch 2.9.1 环境。
+- 服务环境固定 vLLM 0.11.2、Transformers 4.57.1；隔离安装完成。vLLM 依赖 torch 2.9.0，不覆盖 EXP-01 的 torch 2.9.1 环境。
+- 2026-11-01 15:50（UTC+8）：WSL 服务环境 CUDA 矩阵运算验证通过，实际 torch 2.9.0+cu128，识别 RTX 4090 / capability 8.9；见 `environment.json`。
+- `vllm --version` 正常退出，返回 0.11.2；pip check 返回 No broken requirements found。完整依赖见 `requirements.freeze.txt`。这些仅证明环境检查通过，不等于模型加载/推理成功。
 
 ## 网络排查证据
 
@@ -37,7 +39,7 @@ python scripts/download_parallel.py --modelscope-manifest configs/models/qwen3-8
 
 ## 下一步
 
-1. 固定服务引擎版本并在 D 盘独立环境安装，保存依赖清单。
+1. 服务引擎及依赖清单已固定；待模型加载时继续验证运行兼容性。
 2. 按固定 revision 下载权重与 tokenizer，保存许可证并验证文件完整性。
 3. 使用小上下文和有限并发在 localhost 启动 BF16 服务；记录真实显存与加载结果。
 4. 运行流式客户端，再做停止/重启检查。真实请求未通过前，本步骤不能标记完成。

@@ -5,6 +5,6 @@
   "source": "https://huggingface.co/api/models/Qwen/Qwen3-8B",
   "thinking": false,
   "weights_downloaded": false,
-  "engine_version": null,
-  "note": "Revision resolved through Windows local proxy; engine version not yet selected or installed."
+  "engine_version": "0.11.2",
+  "note": "Isolated WSL serving environment installed; CUDA smoke and vLLM CLI passed. Weights are still downloading; model inference is not yet verified."
 }
