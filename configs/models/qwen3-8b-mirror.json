@@ -1,0 +1,36 @@
+{
+  "Data": {
+    "Files": [
+      {
+        "Name": "model-00001-of-00005.safetensors",
+        "Size": 3996250744,
+        "Sha256": "31d6a825ae35f11fb85b195b4c42c146c051e446433125a215336abdf95cbf5f",
+        "Revision": "7c9709d23bd2136dac1d6ea1fe30f4107d681cd6"
+      },
+      {
+        "Name": "model-00002-of-00005.safetensors",
+        "Size": 3993160032,
+        "Sha256": "5991236cea6fe21f3d43cab0f0e84448734fbbe0789816202989f2ddc9d18282",
+        "Revision": "7c9709d23bd2136dac1d6ea1fe30f4107d681cd6"
+      },
+      {
+        "Name": "model-00003-of-00005.safetensors",
+        "Size": 3959604768,
+        "Sha256": "c5185c4794be2d8a9784d5753c9922db38df478ce11f9ed0b415b7304d896836",
+        "Revision": "7c9709d23bd2136dac1d6ea1fe30f4107d681cd6"
+      },
+      {
+        "Name": "model-00004-of-00005.safetensors",
+        "Size": 3187841392,
+        "Sha256": "b5ee7de71fbf17db3d5704e0c8f2bc7d005ca9e1d7ca2aeb19827b0cfcaa917a",
+        "Revision": "7c9709d23bd2136dac1d6ea1fe30f4107d681cd6"
+      },
+      {
+        "Name": "model-00005-of-00005.safetensors",
+        "Size": 1244659840,
+        "Sha256": "20c2d6366ab85c90786ccdd829cd2b9e7d30ef3b2ebbb998280e7e4014b542ff",
+        "Revision": "7c9709d23bd2136dac1d6ea1fe30f4107d681cd6"
+      }
+    ]
+  }
+}

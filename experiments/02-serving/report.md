@@ -23,6 +23,18 @@ curl.exe --proxy http://127.0.0.1:10809 -fsSL --max-time 25 https://huggingface.
 这说明代理路径可访问模型元数据；不等同于已验证所有权重下载 CDN。
 本次没有修改全局代理、防火墙或 WSL 网络模式。后续可从 Windows 使用显式代理将权重下载到 D 盘，再由 WSL 加载本地路径。
 
+### 权重传输源调整
+
+Hugging Face 代理 CDN 长连接多次出现 curl 56 中断，续传单连接约几十至一百多 KiB/s。
+ModelScope 同模型 16 MiB Range 测试返回 HTTP 206，平均约 738087 bytes/s。
+通过两端文件清单核对，5 个 safetensors 的大小与 SHA256 全部相同；保存精简镜像清单 `configs/models/qwen3-8b-mirror.json`。
+续传使用镜像文件固定 commit，其他元数据仍从原始 Hugging Face revision 获取。
+最终模型身份和完整性验收仍以原始 Hugging Face manifest 为准；清单相同不代表本地文件已经下载完成。
+
+```powershell
+python scripts/download_parallel.py --modelscope-manifest configs/models/qwen3-8b-mirror.json
+```
+
 ## 下一步
 
 1. 固定服务引擎版本并在 D 盘独立环境安装，保存依赖清单。
