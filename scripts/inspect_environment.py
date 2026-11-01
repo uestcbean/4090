@@ -6,6 +6,7 @@ import argparse
 import csv
 from datetime import datetime, timezone
 import io
+import importlib.metadata
 import json
 import os
 from pathlib import Path
@@ -30,6 +31,11 @@ def inspect(disk_path, smoke):
         "captured_at_utc": datetime.now(timezone.utc).isoformat(),
         "system": platform.system(), "kernel": platform.release(),
         "python": platform.python_version(), "cpu_logical_count": os.cpu_count(),
+        "python_executable": sys.executable,
+        "python_platform": sys.platform,
+        "installed_packages": sorted(
+            [{"name": d.metadata["Name"], "version": d.version}
+             for d in importlib.metadata.distributions()], key=lambda d: d["name"].lower()),
         "is_wsl": "microsoft" in platform.release().lower(),
         "git": command(["git", "rev-parse", "HEAD"]),
         "git_status": command(["git", "status", "--porcelain"]),
