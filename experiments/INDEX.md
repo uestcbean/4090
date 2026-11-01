@@ -8,7 +8,7 @@
 | 01 | 环境与显存预算 | 工程验证通过；2026-11-01，待学习验收 | [报告](01-environment/report.md) | `4eca0d1` / `a7f4ac5`；结果见报告历史 |
 | 02 | 流式模型服务 | running；revision 已固定，代理路径已验证；未部署 | [报告](02-serving/report.md) | 提交见报告历史 |
 | 03 | BF16 质量基准 | planned | — | — |
-| 04 | 真实监控页面 | planned | — | — |
+| 04 | 真实监控页面 | running；真实 GPU 采样及请求入口已验证，待引擎联调 | [说明](../monitoring/README.md) | 提交见文件历史 |
 | 05 | 压测与基准冻结 | planned | — | — |
 | 06 | Roofline 与 profiling | planned | — | — |
 | 07 | 调度与 KV 容量 | planned | — | — |

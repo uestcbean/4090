@@ -14,6 +14,7 @@ import urllib.request
 ROOT = Path(__file__).parent
 STATE = {"ready": False, "error": "Waiting for first scrape", "history": []}
 LOCK = threading.Lock()
+ENGINE = 'http://127.0.0.1:8000'
 
 
 def parse_metrics(text):
@@ -95,6 +96,66 @@ def poll(engine):
 
 
 class Handler(BaseHTTPRequestHandler):
+    def do_POST(self):
+        if self.path != '/api/generate':
+            self.send_error(404)
+            return
+        started = time.perf_counter()
+        result = {'status': 'failed'}
+        status_code = 502
+        try:
+            size = int(self.headers.get('Content-Length', '0'))
+            if size <= 0 or size > 32768:
+                raise ValueError('Request size must be 1–32768 bytes')
+            payload = json.loads(self.rfile.read(size))
+            if not isinstance(payload, dict):
+                raise ValueError('Request must be a JSON object')
+            prompt = payload.get('prompt')
+            if not isinstance(prompt, str) or not prompt.strip() or len(prompt) > 8000:
+                raise ValueError('Prompt must contain 1–8000 characters')
+            data = {'model': 'qwen3-8b', 'messages': [{'role':'user','content':prompt}],
+                    'stream':True, 'stream_options':{'include_usage':True},
+                    'max_tokens':128,'temperature':0,'chat_template_kwargs':{'enable_thinking':False}}
+            request = urllib.request.Request(ENGINE+'/v1/chat/completions', data=json.dumps(data).encode(),
+                                             headers={'Content-Type':'application/json'})
+            chunks, done, finish = [], False, None
+            with urllib.request.urlopen(request, timeout=180) as response:
+                for raw in response:
+                    line = raw.decode().strip()
+                    if not line.startswith('data:'):
+                        continue
+                    event = line[5:].strip()
+                    if event == '[DONE]':
+                        done = True
+                        break
+                    event = json.loads(event)
+                    if event.get('error'):
+                        raise RuntimeError(str(event['error']))
+                    if event.get('usage'):
+                        result['usage'] = event['usage']
+                    for choice in event.get('choices', []):
+                        content = choice.get('delta',{}).get('content')
+                        if content:
+                            if not chunks:
+                                result['first_content_seconds'] = time.perf_counter()-started
+                            chunks.append(content)
+                        finish = choice.get('finish_reason') or finish
+            if not done or not chunks or not finish:
+                raise RuntimeError('Incomplete stream')
+            result.update(status='passed', content=''.join(chunks), finish_reason=finish)
+        except ValueError as exc:
+            status_code = 400
+            result['error'] = str(exc)
+        except Exception as exc:
+            result['error'] = str(exc)
+        result['elapsed_seconds'] = time.perf_counter()-started
+        body = json.dumps(result, ensure_ascii=False).encode()
+        self.send_response(200 if result['status']=='passed' else status_code)
+        self.send_header('Content-Type','application/json; charset=utf-8')
+        self.send_header('Content-Length',str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+
     def do_GET(self):
         if self.path == "/api/status":
             with LOCK:
@@ -121,6 +182,7 @@ if __name__ == "__main__":
     parser.add_argument("--engine", default="http://127.0.0.1:8000")
     parser.add_argument("--port", type=int, default=8090)
     args = parser.parse_args()
+    ENGINE = args.engine
     threading.Thread(target=poll, args=(args.engine,), daemon=True).start()
     print(f"Observability: http://127.0.0.1:{args.port}", flush=True)
     ThreadingHTTPServer(("127.0.0.1", args.port), Handler).serve_forever()
