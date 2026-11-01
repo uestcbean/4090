@@ -1,0 +1,26 @@
+{
+  "kind": "estimate_not_measurement",
+  "model": "Qwen/Qwen3-8B",
+  "cached_lengths": [
+    8192,
+    8192,
+    8192,
+    8192
+  ],
+  "weight_bits": 16,
+  "kv_bytes_per_element": 2,
+  "kv_bytes_per_token": 147456,
+  "weights_gib_estimate": 14.901161193847656,
+  "kv_gib": 4.5,
+  "runtime_and_other_reserve_gib_assumption": 3,
+  "total_gib_estimate": 22.401161193847656,
+  "capacity_gib_assumption": 24,
+  "headroom_gib_estimate": 1.5988388061523438,
+  "fits_arithmetic_budget_only": true,
+  "limitations": [
+    "Rounded parameter count; quantization metadata/unquantized layers excluded",
+    "No prefix sharing, sliding windows, padding or allocator block rounding",
+    "Reserve is an assumption for activations/workspaces/graphs/desktop, not measured",
+    "A positive headroom is not a guarantee of successful serving"
+  ]
+}

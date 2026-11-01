@@ -1,0 +1,50 @@
+{
+  "captured_at_utc": "2026-10-29T15:41:57.687573+00:00",
+  "system": "Linux",
+  "kernel": "6.18.54.1-microsoft-standard-WSL2",
+  "python": "3.12.3",
+  "cpu_logical_count": 32,
+  "is_wsl": true,
+  "git": {
+    "status": "ok",
+    "returncode": 0,
+    "stdout": "4eca0d1ef7217c7bb1b3d7e9db15a6998e930d48",
+    "stderr": ""
+  },
+  "git_status": {
+    "status": "ok",
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "memory_bytes": {
+    "MemTotal": 16667336704,
+    "MemAvailable": 15792828416,
+    "SwapTotal": 4294967296
+  },
+  "disk": {
+    "path": "/home/bean",
+    "total_bytes": 1081101176832,
+    "free_bytes": 1024034185216,
+    "note": "WSL filesystem capacity is not proof of host backing-volume free space"
+  },
+  "nvidia_smi": {
+    "status": "ok",
+    "returncode": 0,
+    "stdout": "name, memory.total [MiB], memory.free [MiB], driver_version\nNVIDIA GeForce RTX 4090, 24564, 22855, 610.88",
+    "stderr": "",
+    "rows": [
+      {
+        "name": "NVIDIA GeForce RTX 4090",
+        "memory.total [MiB]": "24564",
+        "memory.free [MiB]": "22855",
+        "driver_version": "610.88"
+      }
+    ]
+  },
+  "torch": {
+    "status": "failed",
+    "error_type": "ModuleNotFoundError",
+    "reason": "No module named 'torch'"
+  }
+}

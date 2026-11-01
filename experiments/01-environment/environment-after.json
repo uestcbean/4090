@@ -1,0 +1,191 @@
+{
+  "captured_at_utc": "2026-11-01T06:39:33.899980+00:00",
+  "system": "Linux",
+  "kernel": "6.18.54.1-microsoft-standard-WSL2",
+  "python": "3.12.3",
+  "cpu_logical_count": 32,
+  "python_executable": "/home/bean/.venvs/4090-exp01/bin/python",
+  "python_platform": "linux",
+  "installed_packages": [
+    {
+      "name": "filelock",
+      "version": "4.2.4"
+    },
+    {
+      "name": "fsspec",
+      "version": "2026.9.0"
+    },
+    {
+      "name": "Jinja2",
+      "version": "3.1.6"
+    },
+    {
+      "name": "MarkupSafe",
+      "version": "3.0.3"
+    },
+    {
+      "name": "mpmath",
+      "version": "1.3.0"
+    },
+    {
+      "name": "networkx",
+      "version": "3.7"
+    },
+    {
+      "name": "nvidia-cublas-cu12",
+      "version": "12.8.4.1"
+    },
+    {
+      "name": "nvidia-cuda-cupti-cu12",
+      "version": "12.8.90"
+    },
+    {
+      "name": "nvidia-cuda-nvrtc-cu12",
+      "version": "12.8.93"
+    },
+    {
+      "name": "nvidia-cuda-runtime-cu12",
+      "version": "12.8.90"
+    },
+    {
+      "name": "nvidia-cudnn-cu12",
+      "version": "9.10.2.21"
+    },
+    {
+      "name": "nvidia-cufft-cu12",
+      "version": "11.3.3.83"
+    },
+    {
+      "name": "nvidia-cufile-cu12",
+      "version": "1.13.1.3"
+    },
+    {
+      "name": "nvidia-curand-cu12",
+      "version": "10.3.9.90"
+    },
+    {
+      "name": "nvidia-cusolver-cu12",
+      "version": "11.7.3.90"
+    },
+    {
+      "name": "nvidia-cusparse-cu12",
+      "version": "12.5.8.93"
+    },
+    {
+      "name": "nvidia-cusparselt-cu12",
+      "version": "0.7.1"
+    },
+    {
+      "name": "nvidia-nccl-cu12",
+      "version": "2.27.5"
+    },
+    {
+      "name": "nvidia-nvjitlink-cu12",
+      "version": "12.8.93"
+    },
+    {
+      "name": "nvidia-nvshmem-cu12",
+      "version": "3.3.20"
+    },
+    {
+      "name": "nvidia-nvtx-cu12",
+      "version": "12.8.90"
+    },
+    {
+      "name": "setuptools",
+      "version": "78.1.0"
+    },
+    {
+      "name": "sympy",
+      "version": "1.14.0"
+    },
+    {
+      "name": "torch",
+      "version": "2.9.1+cu128"
+    },
+    {
+      "name": "triton",
+      "version": "3.5.1"
+    },
+    {
+      "name": "typing_extensions",
+      "version": "4.16.0"
+    }
+  ],
+  "is_wsl": true,
+  "git": {
+    "status": "ok",
+    "returncode": 0,
+    "stdout": "a7f4ac5b9cad3b8867b994425cafc94c13d42360",
+    "stderr": ""
+  },
+  "git_status": {
+    "status": "ok",
+    "returncode": 0,
+    "stdout": "?? experiments/01-environment/",
+    "stderr": ""
+  },
+  "memory_bytes": {
+    "MemTotal": 16667336704,
+    "MemAvailable": 15889440768,
+    "SwapTotal": 4294967296
+  },
+  "disk": {
+    "path": "/home/bean",
+    "total_bytes": 1081101176832,
+    "free_bytes": 1012797087744,
+    "note": "WSL filesystem capacity is not proof of host backing-volume free space"
+  },
+  "nvidia_smi": {
+    "status": "ok",
+    "returncode": 0,
+    "stdout": "name, memory.total [MiB], memory.free [MiB], driver_version\nNVIDIA GeForce RTX 4090, 24564, 22692, 610.88",
+    "stderr": "",
+    "rows": [
+      {
+        "name": "NVIDIA GeForce RTX 4090",
+        "memory.total [MiB]": "24564",
+        "memory.free [MiB]": "22692",
+        "driver_version": "610.88"
+      }
+    ]
+  },
+  "torch": {
+    "version": "2.9.1+cu128",
+    "built_cuda": "12.8",
+    "cuda_available": true,
+    "device": "NVIDIA GeForce RTX 4090",
+    "capability": [
+      8,
+      9
+    ],
+    "status": "passed",
+    "smoke": "4x4 float32 CUDA matmul equals CPU reference; not a benchmark",
+    "result": [
+      [
+        14.0,
+        38.0,
+        62.0,
+        86.0
+      ],
+      [
+        38.0,
+        126.0,
+        214.0,
+        302.0
+      ],
+      [
+        62.0,
+        214.0,
+        366.0,
+        518.0
+      ],
+      [
+        86.0,
+        302.0,
+        518.0,
+        734.0
+      ]
+    ]
+  }
+}

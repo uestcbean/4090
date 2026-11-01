@@ -1,0 +1,10 @@
+test_hand_calculated_qwen_example (test_memory_budget.MemoryBudgetTests.test_hand_calculated_qwen_example) ... ok
+test_insufficient_capacity (test_memory_budget.MemoryBudgetTests.test_insufficient_capacity) ... ok
+test_invalid_inputs (test_memory_budget.MemoryBudgetTests.test_invalid_inputs) ... ok
+test_unequal_lengths_and_zero_cache (test_memory_budget.MemoryBudgetTests.test_unequal_lengths_and_zero_cache) ... ok
+test_weight_quantization_does_not_quantize_kv (test_memory_budget.MemoryBudgetTests.test_weight_quantization_does_not_quantize_kv) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.002s
+
+OK
