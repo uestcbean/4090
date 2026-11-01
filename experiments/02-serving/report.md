@@ -8,7 +8,7 @@
 - 固定模型 revision：`b968826d9c46dd6066d109eabc6255188de91218`，见 configs/models/qwen3-8b-manifest.json。
 - 添加标准库流式客户端 scripts/smoke_request.py，明确关闭 thinking；检查非空内容、finish_reason 和 DONE。
 - 在服务未启动时执行客户端，确认连接失败以非零退出码结束并保存失败状态，不伪造成功结果。
-- 当前 PyPI 返回 vLLM 0.32.0；尚未选择/安装服务引擎版本，不将最新版本等同于已验证的兼容版本。
+- 服务环境固定 vLLM 0.11.2、Transformers 4.57.1；隔离安装正在进行。vLLM 依赖 torch 2.9.0，不覆盖 EXP-01 的 torch 2.9.1 环境。
 
 ## 网络排查证据
 
@@ -37,3 +37,24 @@ python3 scripts/smoke_request.py --output experiments/02-serving/first-request.j
 ```
 
 客户端的 first_content_chunk_seconds 是客户端观测值，不能直接把网络 chunk 当成单 token，也不能从一次请求推断服务容量。
+
+## 真实观测演示（待执行）
+
+```bash
+python3 scripts/observe_serving.py --output experiments/02-serving/observations.json
+```
+
+脚本先发送一个本轮独有的长前缀，然后重复请求，再同时发送 4 个相同前缀请求。
+每阶段保存请求内容、响应、usage、首内容等待时间、总耗时、引擎原始指标前后快照及区间统计。
+运行时停止其他客户端请求，否则引擎全局计数包含额外流量。
+
+学习任务：
+
+1. 在 repeated_prefix 阶段计算 `Δprefix_cache_hits_total / Δprefix_cache_queries_total`，核对面板比例。
+2. 解释为什么缓存复用主要节约已有前缀的 prefill 工作，而输出 token 仍需要 decode。
+3. 在 concurrent_repeat 阶段观察运行请求数与显存；并发会共享部分前缀，但各请求继续生成的 KV 会产生额外占用。
+4. 比较首内容等待和 TPOT，说明它们分别对应什么工作。一次演示受首次编译、预热和排队影响，不能证明优化提升幅度。
+
+理论和口径依据：[固定版本 vLLM 指标源码](https://github.com/vllm-project/vllm/blob/v0.11.2/vllm/v1/metrics/loggers.py)。
+前缀命中统计单位是 token；KV 使用率 1 表示缓存池 100%；TPOT histogram 每个请求记录一个值。
+监控区间均值为 `Δsum / Δcount`，不是直方图桶推算的 p95。脚本的三阶段演示不替代后续固定负载、多轮重复的基准测试。
