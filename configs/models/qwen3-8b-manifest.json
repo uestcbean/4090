@@ -1,0 +1,10 @@
+{
+  "model_id": "Qwen/Qwen3-8B",
+  "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+  "resolved_on": "2026-11-01",
+  "source": "https://huggingface.co/api/models/Qwen/Qwen3-8B",
+  "thinking": false,
+  "weights_downloaded": false,
+  "engine_version": null,
+  "note": "Revision resolved through Windows local proxy; engine version not yet selected or installed."
+}
